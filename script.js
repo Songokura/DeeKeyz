@@ -1,5 +1,5 @@
 /* ============================================================
-   DEE.KEYZ GARAGE - скрипт страницы.
+   DEEKEYZ MOTORS - скрипт страницы.
    Плиты (герой: база на интро, лак по скроллу, толщиномер;
    фото-плиты: проход краскопульта по --p1) · перевод RU/EN,
    казахский словарь грузится отдельным файлом по кнопке KZ ·
@@ -26,10 +26,10 @@ function conv(key, item){
 
 /* ---------------- АНГЛИЙСКИЙ СЛОВАРЬ ---------------- */
 var EN = {
-  "m.title":"Car Painting and Body Repair in Almaty - DEE.KEYZ GARAGE",
+  "m.title":"Car Painting and Body Repair in Almaty - DEEKEYZ MOTORS",
   "m.desc":"Body repair and car painting in Almaty since 2017. Panel painting from 40,000 KZT, accident repair, polishing, paint protection film, interior restoration. Free photo estimate on WhatsApp, 5-year paint warranty.",
-  "m.ogt":"DEE.KEYZ GARAGE - car painting and body repair in Almaty",
-  "a.menu":"Menu","a.home":"DEE.KEYZ GARAGE - home","a.nav":"Sections","a.lang":"Site language","a.call":"Call","a.mnav":"Mobile menu",
+  "m.ogt":"DEEKEYZ MOTORS - car painting and body repair in Almaty",
+  "a.menu":"Menu","a.home":"DEEKEYZ MOTORS - home","a.nav":"Sections","a.lang":"Site language","a.call":"Call","a.mnav":"Mobile menu",
   "a.hero":"Car painting and body repair in Almaty","a.nums":"Numbers and clients","a.pokraska":"Car painting","a.kuzovnoy":"Body repair","a.polirovka":"Paint polishing","a.bron":"Paint protection film","a.salon":"Interior restoration","a.proc":"How we work","a.prev":"Back","a.next":"Forward","a.strip":"Repair photos","a.price":"All services and prices","a.dirs":"Detailing, fleets, parts","a.offers":"Offers and gifts","a.guar":"Warranty","a.kont":"Contacts","a.bar":"Quick contact",
   "n.uslugi":"Services","n.ceny":"Prices","n.raboty":"Work","n.akcii":"Offers","n.garantiya":"Warranty","n.kontakty":"Contacts",
   "mn.pokraska":"Car painting","mn.kuzovnoy":"Body repair","mn.polirovka":"Polishing","mn.bronplenka":"Protection film","mn.salon":"Interior restoration",
@@ -97,7 +97,7 @@ var EN = {
   "f.err":"Enter your phone so we can reply.",
   "ft.d":"Body repair and car painting in Almaty. Since 2017.",
   "al.hero":"Painter in a spray booth preparing a car body for the base coat","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Technician shaping a rear fender before painting","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying protection film to the hood and headlight","al.salon":"Leather car interior after restoration",
-  "al.w1":"Lexus ES 330: front end after the crash, intake","al.w2":"Lexus ES 330: front end teardown and inspection","al.w3":"Lexus ES 330: hood shaped with filler","al.w4":"Lexus ES 330: preparing the rear end for primer","al.w5":"Lexus ES 330: rear end in primer","al.w6":"DEE.KEYZ GARAGE shop at Ryskulov 103/3",
+  "al.w1":"Lexus ES 330: front end after the crash, intake","al.w2":"Lexus ES 330: front end teardown and inspection","al.w3":"Lexus ES 330: hood shaped with filler","al.w4":"Lexus ES 330: preparing the rear end for primer","al.w5":"Lexus ES 330: rear end in primer","al.w6":"DEEKEYZ MOTORS shop at Ryskulov 103/3",
   "al.det":"Detailing: brushing a wheel rim","al.fleet":"Fleet cars in a service bay",
   "mq.list":"Car painting|Body repair|Accident restoration|Polishing|Protection film|Interior restoration|Detailing|Parts|Fleets"
 };
@@ -109,8 +109,8 @@ var RU = {};                                       /* снимок русско�
    data-wa="general|photo|service"; service берёт название из data-wa-title (ключ i18n).
    Обработчик в фазе захвата на window - раньше трекера LeadBot, чтобы он дописал код к готовой ссылке. */
 var WA_T = {
-  ru:{general:"Здравствуйте! Пишу с сайта DEE.KEYZ GARAGE.", photo:"Здравствуйте! Хочу получить бесплатную оценку ремонта по фото. Отправляю фото повреждений:", service:"Здравствуйте! Пишу с сайта DEE.KEYZ GARAGE. Интересует:\n{name}\nПодскажите стоимость и сроки."},
-  en:{general:"Hello! I'm writing from the DEE.KEYZ GARAGE website.", photo:"Hello! I'd like a free repair estimate from photos. Sending photos of the damage:", service:"Hello! I'm writing from the DEE.KEYZ GARAGE website. I'm interested in:\n{name}\nPlease tell me the price and timing."}
+  ru:{general:"Здравствуйте! Пишу с сайта DEEKEYZ MOTORS.", photo:"Здравствуйте! Хочу получить бесплатную оценку ремонта по фото. Отправляю фото повреждений:", service:"Здравствуйте! Пишу с сайта DEEKEYZ MOTORS. Интересует:\n{name}\nПодскажите стоимость и сроки."},
+  en:{general:"Hello! I'm writing from the DEEKEYZ MOTORS website.", photo:"Hello! I'd like a free repair estimate from photos. Sending photos of the damage:", service:"Hello! I'm writing from the DEEKEYZ MOTORS website. I'm interested in:\n{name}\nPlease tell me the price and timing."}
 };
 function tr(key){
   var L = curLang(), d = I18N[L];
@@ -380,8 +380,8 @@ addEventListener("resize", stripsState);
 
 /* ---------------- ФОРМА -> WhatsApp ---------------- */
 var FORM_T = {
-  ru:{hello:"Здравствуйте! Заявка с сайта DEE.KEYZ GARAGE.", name:"Имя", what:"Услуга", msg:"Авто и что случилось", phone:"Телефон", none:"не выбрана"},
-  en:{hello:"Hello! Request from the DEE.KEYZ GARAGE website.", name:"Name", what:"Service", msg:"Car and what happened", phone:"Phone", none:"not chosen"}
+  ru:{hello:"Здравствуйте! Заявка с сайта DEEKEYZ MOTORS.", name:"Имя", what:"Услуга", msg:"Авто и что случилось", phone:"Телефон", none:"не выбрана"},
+  en:{hello:"Hello! Request from the DEEKEYZ MOTORS website.", name:"Name", what:"Service", msg:"Car and what happened", phone:"Phone", none:"not chosen"}
 };
 var form = document.getElementById("form");
 if (form) form.addEventListener("submit", function(e){

@@ -91,7 +91,7 @@ h2{font:800 clamp(32px,min(5.2vw,7.2svh),64px)/.98 var(--fd);letter-spacing:-.01
 .hdr.solid{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 body.menu-open .hdr{backdrop-filter:none;-webkit-backdrop-filter:none}
 .hdr-in{position:relative;z-index:2;display:flex;align-items:center;gap:24px;height:100%;width:min(1360px,100% - 48px);margin-inline:auto}
-.logo{display:block;height:52px;position:relative;z-index:2;flex:0 0 auto}
+.logo{display:block;height:30px;position:relative;z-index:2;flex:0 0 auto}
 .logo img{height:100%;width:auto}
 .nav{display:flex;gap:26px;margin-left:auto;font:500 14px/1 var(--ft);color:rgba(255,255,255,.86)}
 .nav a{padding:8px 0;position:relative;transition:color .25s}
@@ -128,10 +128,10 @@ body.menu-open{overflow:hidden}
 @media(max-width:760px){
   :root{--hh:64px}
   .hdr-in{width:calc(100% - 32px)}
-  .logo{height:40px}
+  .logo{height:22px}
   .rnd-ig{display:none}
 }
-@media(max-width:420px){.logo{height:32px}.lang button{padding:6px 9px;font-size:11px}.hdr-in{gap:8px}}
+@media(max-width:420px){.logo{height:clamp(13px,calc((100vw - 252px) / 8.2),17px)}.lang button{padding:6px 9px;font-size:11px}.hdr-in{gap:8px}}
 @media(min-width:1081px){.mnav{display:none}}
 
 /* ---------- плиты ---------- */
@@ -476,7 +476,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .fm-err{padding:12px 14px;border-radius:8px;background:rgba(225,6,0,.16);color:#FFB3AE;font:500 13px/1.4 var(--ft)}
 .foot{margin-top:clamp(64px,8vw,104px);padding-top:30px;border-top:1px solid var(--line)}
 .foot-in{display:grid;grid-template-columns:auto 1fr auto;gap:14px 30px;align-items:center}
-.flogo{height:52px;width:auto}
+.flogo{height:96px;width:auto}
 .fdesc{font:400 14px/1.4 var(--ft);color:var(--steel)}
 .fig{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--ft);color:#fff}
 .copy{grid-column:1/-1;font:400 12px/1 var(--ft);color:var(--steel)}
@@ -486,7 +486,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .kbtns .btn{width:100%}
   .form{padding:18px}
   .foot-in{grid-template-columns:1fr;gap:12px;text-align:left}
-  .flogo{height:44px}
+  .flogo{height:84px}
 }
 
 /* ---------- липкая панель ---------- */
