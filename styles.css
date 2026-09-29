@@ -503,7 +503,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .fm-err{padding:12px 14px;border-radius:8px;background:rgba(225,6,0,.16);color:#FFB3AE;font:500 13px/1.4 var(--ft)}
 .foot{margin-top:clamp(64px,8vw,104px);padding-top:30px;border-top:1px solid var(--line)}
 .foot-in{display:grid;grid-template-columns:auto 1fr auto;gap:14px 30px;align-items:center}
-.flogo{width:min(320px,78vw);height:auto}
+.flogo{width:min(300px,72vw);height:auto}
 .fdesc{font:400 14px/1.4 var(--ft);color:var(--steel)}
 .fig{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--ft);color:#fff}
 .copy{grid-column:1/-1;font:400 12px/1 var(--ft);color:var(--steel)}
@@ -513,7 +513,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .kbtns .btn{width:100%}
   .form{padding:18px}
   .foot-in{grid-template-columns:1fr;gap:12px;text-align:left}
-  .flogo{width:min(300px,78vw)}
+  .flogo{width:min(260px,72vw)}
 }
 
 /* ---------- липкая панель ---------- */
