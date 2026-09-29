@@ -543,3 +543,9 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 }
 .hero .lead,.hero .l2,.hero .ig-link{text-shadow:0 1px 2px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.7)}
 @media(min-width:761px){.hero .lay{object-position:50% 10%}}
+/* герой: фото не затемняем (решение клиента 29.09.2026), тёмная подложка только под текстом */
+.hero .lay-gloss{display:none}
+.hero .shade{background:linear-gradient(90deg,rgba(7,8,10,.82) 0%,rgba(7,8,10,.62) 30%,rgba(7,8,10,.2) 48%,rgba(7,8,10,0) 58%)}
+@media(max-width:760px){.hero .shade{background:linear-gradient(180deg,rgba(7,8,10,0) 0%,rgba(7,8,10,0) 34%,rgba(7,8,10,.72) 46%,rgba(7,8,10,.9) 100%)}}
+.hero .lay-primer{filter:none}
+.hero .kicker,.hero .l2,.hero .lead,.hero .ig-link,.hero .gauge{text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 22px rgba(0,0,0,.65)}
