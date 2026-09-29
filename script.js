@@ -58,9 +58,28 @@ var EN = {
   "p5.l":"We bring the interior back to new without replacing parts: leather and plastic restoration, steering wheel, deep cleaning.",
   "p5.c1":"Interior","p5.c2":"Steering wheel","p5.c3":"Deep cleaning",
   "w.k":"Transparent repair","w.h":"You see every stage",
-  "w.l":"Free photo and video report: from teardown to handover. Lexus ES 330 after an accident - a full repaint in our Ryskulov shop.",
-  "w.c1":"Intake: front end after the crash","w.c2":"Teardown and inspection","w.c3":"Filler: shaping the hood","w.c4":"Preparing the rear end","w.c5":"Primer: rear end ready for base","w.c6":"Shop at Ryskulov 103/3",
+  "w.l":"Free photo and video report: from teardown to handover. A 2020 Toyota Highlander after an accident - full repaint and restoration in our Ryskulov shop.",
   "w.ig":"More work on Instagram",
+  "ba.c10":"Door card: reupholstery",
+  "ba.c9":"Land Cruiser interior: leather reupholstery",
+  "ba.c8":"Land Cruiser 200: body restoration",
+  "ba.c7":"Land Cruiser Prado: body restoration",
+  "ba.c6":"Land Cruiser 200: restyling",
+  "ba.c5":"Land Cruiser 200: body restoration",
+  "ba.c4":"Land Cruiser 200: restyling",
+  "ba.c3":"Mercedes-Benz S-Class: restyling",
+  "ba.c2":"Land Cruiser 200 after an accident: body work and restyling",
+  "ba.c1":"Land Cruiser 200 after an accident: restoration and restyling",
+  "ba.after":"After",
+  "ba.before":"Before",
+  "ba.l":"Our clients' cars: top - as they arrived, bottom - as they left.",
+  "ba.h":"Before and after",
+  "ba.k":"Our work",
+  "a.ba":"Before and after",
+  "v.cap":"After an accident: full repaint and restoration in our Ryskulov shop",
+  "v.snd":"Watch with sound",
+  "a.video":"Video: 2020 Toyota Highlander after an accident, repaint and restoration in the shop",
+  "al.parts":"Parts warehouse: shelving with parts",
   "s1.h":"Photo on WhatsApp","s1.t":"Free estimate","s2.h":"Inspection and quote","s2.t":"Scope and price agreed upfront","s3.h":"Repair with reports","s3.t":"Photos and video at every stage","s4.h":"Wash and handover","s4.t":"Free wash, taxi at drop-off",
   "u.k":"Prices","u.h":"All services and starting prices",
   "u.l":"We give the exact price after a photo estimate or a free inspection at the shop. Tap a service - WhatsApp opens with a ready question.",
@@ -72,7 +91,7 @@ var EN = {
   "ph.empty":"Object photo","ph.parts":"Object photo: parts warehouse",
   "d1.h":"Detailing and deep cleaning","d1.t":"Interior deep cleaning from 40,000 KZT, detailing from 30,000 KZT. A free wash after any repair.",
   "d2.h":"Fleets and business","d2.t":"Up to 25% off and priority queue. Repair from 50,000 KZT, contract and report for each car. Car clubs 20%, bikers 25%.",
-  "d3.h":"Parts sourcing","d3.t":"New and used parts from 5,000 KZT, options for any budget. Delivery across Almaty, Astana and all of Kazakhstan.",
+  "d3.h":"Parts sourcing","d3.t":"We work with the largest wholesalers in Kazakhstan and used-parts warehouses in China and Almaty. Parts from 5,000 KZT, delivery across Kazakhstan.",
   "o.k":"Offers","o.h":"What comes free with your repair","o.l":"We take care of you, not just the car: from the first photo to the keys.",
   "o1.h":"Photo estimate","o1.t":"Send photos on WhatsApp - we give a free price guide",
   "o2.h":"Inspection and advice","o2.t":"Free before the repair, no obligation",
@@ -96,8 +115,7 @@ var EN = {
   "f.ok":"Thank you! Opening WhatsApp with your request - if the window did not appear, message us directly.",
   "f.err":"Enter your phone so we can reply.",
   "ft.d":"Body repair and car painting in Almaty. Since 2017.",
-  "al.hero":"Painter in a spray booth preparing a car body for the base coat","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Technician shaping a rear fender before painting","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying protection film to the hood and headlight","al.salon":"Leather car interior after restoration",
-  "al.w1":"Lexus ES 330: front end after the crash, intake","al.w2":"Lexus ES 330: front end teardown and inspection","al.w3":"Lexus ES 330: hood shaped with filler","al.w4":"Lexus ES 330: preparing the rear end for primer","al.w5":"Lexus ES 330: rear end in primer","al.w6":"DEEKEYZ MOTORS shop at Ryskulov 103/3",
+  "al.hero":"DEEKEYZ MOTORS technician in a spray booth next to a Toyota Highlander","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Technician shaping a rear fender before painting","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying protection film to the hood and headlight","al.salon":"Leather car interior after restoration",
   "al.det":"Detailing: brushing a wheel rim","al.fleet":"Fleet cars in a service bay",
   "mq.list":"Car painting|Body repair|Accident restoration|Polishing|Protection film|Interior restoration|Detailing|Parts|Fleets"
 };
@@ -344,6 +362,23 @@ if (HAS_IO) {
   document.querySelectorAll(".rv").forEach(function(el){ el.classList.add("in"); });
   document.querySelectorAll("[data-count]").forEach(function(el){ el.textContent = el.dataset.count; });
 }
+
+/* ---------------- ВИДЕО HIGHLANDER ----------------
+   src ставится, когда видео входит в кадр: без звука, петлёй; ушло из кадра - пауза.
+   Кнопка «со звуком» включает звук и прячется. reduced-motion - только постер и controls. */
+(function(){
+  var v = document.getElementById("hlv"), b = document.getElementById("hlvs");
+  if (!v) return;
+  function load(){ if (!v.getAttribute("src")) { v.src = v.dataset.src; } }
+  function play(){ load(); var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  if (b) b.addEventListener("click", function(){ v.muted = false; v.volume = 1; play(); b.hidden = true; });
+  v.addEventListener("volumechange", function(){ if (b && !v.muted) b.hidden = true; });
+  if (HAS_IO && !RED) {
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
+    }, {threshold:.5}).observe(v);
+  } else load();
+})();
 
 /* ---------------- ЛЕНТА С КНОПКАМИ ЛИСТАНИЯ ----------------
    Шаг - ровно одна карточка (ширина из getBoundingClientRect + gap из стилей),

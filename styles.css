@@ -354,6 +354,33 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .nick{text-align:center}
 }
 
+/* ---------- видео Highlander ---------- */
+.proc-body{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,72px);align-items:center;margin-top:40px}
+.vcard{position:relative;height:min(76svh,720px);aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:var(--graph);box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px var(--line)}
+.vplay{display:block;width:100%;height:100%;object-fit:cover;background:var(--graph)}
+.vsound{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:0;border-radius:999px;background:var(--red);color:#fff;font:600 14px/1 var(--ft);cursor:pointer;white-space:nowrap;box-shadow:0 8px 24px rgba(225,6,0,.4);transition:background .25s,opacity .25s}
+.vsound:hover{background:var(--red-h)}
+.vsound[hidden]{display:none}
+.vcap{padding-left:16px;border-left:2px solid var(--red)}
+.vcap b{display:block;font:800 clamp(22px,2.6vw,34px)/1.05 var(--fd);text-transform:uppercase;letter-spacing:.01em}
+.vcap span{display:block;margin-top:8px;font:400 15px/1.45 var(--ft);color:var(--steel2)}
+.proc-side .steps{grid-template-columns:1fr 1fr;margin-top:34px;gap:26px 22px}
+.proc-side .ig-more{margin-top:34px}
+/* ---------- до и после ---------- */
+.strip-ba figure{width:min(340px,78vw)}
+.strip-ba img{aspect-ratio:1/1}
+.strip-ba .tag{position:absolute;left:10px;z-index:2;padding:4px 9px;border-radius:5px;font:700 11px/1 var(--ft);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(7,8,10,.72)}
+.strip-ba .tag-b{top:10px}
+.strip-ba .tag-a{top:calc(50% + 6px);background:var(--red)}
+.strip-ba figcaption{padding-top:36px}
+@media(max-width:760px){
+  .proc-body{grid-template-columns:1fr;margin-top:28px;gap:30px}
+  .vcard{height:auto;width:100%;max-width:420px;margin:0 auto}
+  .vsound{bottom:58px}
+  .proc-side .steps{margin-top:24px}
+  .proc-side .ig-more{margin-top:26px}
+}
+
 /* ---------- прайс ---------- */
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
 .pcol h3{font:800 20px/1.1 var(--fd);text-transform:uppercase;letter-spacing:.01em;padding-bottom:14px;border-bottom:2px solid var(--ink);display:flex;align-items:center;gap:10px}
@@ -476,7 +503,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .fm-err{padding:12px 14px;border-radius:8px;background:rgba(225,6,0,.16);color:#FFB3AE;font:500 13px/1.4 var(--ft)}
 .foot{margin-top:clamp(64px,8vw,104px);padding-top:30px;border-top:1px solid var(--line)}
 .foot-in{display:grid;grid-template-columns:auto 1fr auto;gap:14px 30px;align-items:center}
-.flogo{height:96px;width:auto}
+.flogo{width:min(320px,78vw);height:auto}
 .fdesc{font:400 14px/1.4 var(--ft);color:var(--steel)}
 .fig{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--ft);color:#fff}
 .copy{grid-column:1/-1;font:400 12px/1 var(--ft);color:var(--steel)}
@@ -486,7 +513,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .kbtns .btn{width:100%}
   .form{padding:18px}
   .foot-in{grid-template-columns:1fr;gap:12px;text-align:left}
-  .flogo{height:84px}
+  .flogo{width:min(300px,78vw)}
 }
 
 /* ---------- липкая панель ---------- */
@@ -505,3 +532,4 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .glow{animation:none}
 }
+.hero .kicker{text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 14px rgba(0,0,0,.75)}
