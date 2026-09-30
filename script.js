@@ -12,6 +12,9 @@ var WA = "77761566666";
 var RED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 var HAS_IO = typeof IntersectionObserver === "function";
 var root = document.documentElement;
+/* Плиты и появления по прокрутке сняты 30.09.2026: клиент жаловался, что сайт «лагает».
+   Страница всегда в статичном режиме no-plate (тот же, что для reduced-motion). */
+var STATIC = true;
 var ASSET_V = ((document.currentScript && document.currentScript.src.match(/[?&]v=([^&]+)/)) || [])[1] || "";
 
 /* ---------------- КОНВЕРСИИ GOOGLE ADS ----------------
@@ -41,18 +44,18 @@ var EN = {
   "g.lbl":"Paint layers","g.primer":"Primer","g.base":"Base","g.clear":"Clear",
   "c.1":"cars restored","c.2":"clients trusted us with their cars","c.3":"cars in the shop every month","c.4":"the year the shop opened","c.5y":"years","c.5":"paint warranty",
   "c.vip":"Our clients include Kairat Nurtas, artists and bloggers of Almaty",
-  "p1.k":"Painting","p1.h":"Car painting","p1.s":"one panel, spot repair or the whole car",
+  "p1.k":"Painting","p1.h":"Car painting","p1.s":"one panel, spot repair, full repaint with or without door jambs",
   "p1.l":"Colour matched to your shade, booth painting, 5-year paint warranty. After a full repaint - interior cleaning as a gift.",
-  "p1.c1":"One panel","p1.c2":"Gauge-proof","p1.c3":"Whole car",
+  "p1.c1":"One panel","p1.c2":"Gauge-proof","p1.c3":"Full repaint","p1.c5":"Spot repair",
   "p2.k":"Body repair","p2.h":"Body repair","p2.s":"and restoration after an accident",
   "p2.l":"From a dent to frame geometry after a crash. We source and order parts and show every stage in photos and video.",
   "p2.c1":"After accident","p2.c2":"Dents and scratches","p2.c3":"Frame geometry",
   "p3.k":"Polishing","p3.h":"Paint polishing","p3.s":"professional, in 3 stages",
   "g.unit":"microns",
-  "p3.l":"We remove swirl marks, holograms and fine scratches, bringing back colour depth and a mirror shine.",
+  "p3.l":"We remove holograms and fine scratches, bringing back colour depth and a mirror shine. A quality ceramic coating keeps the gloss for a long time.",
   "p3.c1":"3 stages","p3.c2":"Headlights","p3.c3":"Exterior care",
-  "p4.k":"Protection film","p4.h":"Protection film","p4.s":"for the body: luxury package or full wrap",
-  "p4.l":"Clear protection for your paint against chips, sand and road salt. High-risk zones or the whole body.",
+  "p4.k":"Protection film","p4.h":"Protection film","p4.s":"clear, matte, coloured and textured",
+  "p4.l":"Paint protection against chips, sand and road salt. Luxury package for high-risk zones or a full body wrap.",
   "p4.c1":"Luxury package","p4.c2":"Full wrap",
   "p5.k":"Interior","p5.h":"Interior restoration","p5.s":"leather, steering wheel, plastic, deep cleaning",
   "p5.l":"We bring the interior back to new without replacing parts: leather and plastic restoration, steering wheel, deep cleaning.",
@@ -83,7 +86,7 @@ var EN = {
   "vi.3":"Is a garage repair cheaper?",
   "vi.4":"How to check panel gaps after a repair",
   "vi.5":"How not to overpay: inspection before repair",
-  "a.vids":"Repair videos","a.vgo":"Play video",
+  "a.vids":"Repair videos","a.vgo":"Play video","v.go":"Watch",
   "a.ba":"Before and after",
   "v.cap":"After an accident: full repaint and restoration in our Ryskulov shop",
   "v.snd":"Watch with sound",
@@ -93,7 +96,7 @@ var EN = {
   "u.k":"Prices","u.h":"All services and starting prices",
   "u.l":"We give the exact price after a photo estimate or a free inspection at the shop. Tap a service - WhatsApp opens with a ready question.",
   "u.g1":"Body and paint","u.g2":"Exterior","u.g3":"Interior and service",
-  "u.1":"Accident repair","u.2":"Body element repair and restoration","u.3":"Frame geometry restoration","u.4":"Dent and scratch removal","u.5":"Body part replacement and repair","u.6":"Bumper and plastic restoration","u.7":"Painting of individual panels","u.8":"Spot painting","u.9":"Gauge-proof painting","u.10":"Whole car repaint","u.11":"Complete vehicle restoration",
+  "u.1":"Accident repair","u.2":"Body element repair and restoration","u.3":"Frame geometry restoration","u.4":"Dent and scratch removal","u.5":"Body part replacement and repair","u.6":"Bumper and plastic restoration","u.7":"Painting of individual panels","u.8":"Spot painting","u.9":"Gauge-proof painting","u.10":"Full repaint (with or without door jambs)","u.11":"Complete vehicle restoration",
   "u.12":"Full paint polishing","u.13":"Headlight and optics restoration","u.14":"Protection film: luxury package","u.15":"Full body protection film wrap","u.16":"Windshield replacement","u.17":"Exterior restoration and care","u.18":"Detailing","u.19":"Restyling and exterior redesign",
   "u.20":"Interior restoration","u.21":"Steering wheel restoration","u.22":"Interior deep cleaning","u.23":"Parts sourcing and ordering","u.24":"Repair for corporate clients and fleets",
   "u.note":"Starting prices in tenge. The final price depends on the model, damage and materials.",
@@ -124,8 +127,8 @@ var EN = {
   "f.ok":"Thank you! Opening WhatsApp with your request - if the window did not appear, message us directly.",
   "f.err":"Enter your phone so we can reply.",
   "ft.d":"Body repair and car painting in Almaty. Since 2017.",
-  "al.hero":"DEEKEYZ MOTORS technician in a spray booth next to a Toyota Highlander","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Technician shaping a rear fender before painting","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying protection film to the hood and headlight","al.salon":"Leather car interior after restoration",
-  "al.det":"Detailing: brushing a wheel rim","al.fleet":"Fleet cars in a service bay",
+  "al.hero":"DEEKEYZ MOTORS technician in a spray booth next to a Toyota Highlander","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Mercedes S-Class on a frame straightener: rear body restoration","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying clear protection film to the fender of a black car","al.salon":"Leather car interior after restoration",
+  "al.det":"Interior cleaning: brushing the air vents","al.fleet":"Fleet: a row of white company vans",
   "mq.list":"Car painting|Body repair|Accident restoration|Polishing|Protection film|Interior restoration|Detailing|Parts|Fleets"
 };
 var RU_MQ = "Покраска авто|Кузовной ремонт|Ремонт после ДТП|Полировка|Бронеплёнка|Реставрация салона|Детейлинг|Запчасти|Автопаркам";
@@ -302,7 +305,7 @@ function update(){
     bar.classList.toggle("show", scrollY > H * 0.55 && !onKont);
   }
 }
-if (RED) {
+if (RED || STATIC) {
   root.classList.add("no-plate");
   pws.forEach(function(pw){ pw.classList.add("on"); });
   if (gread) gread.textContent = "110";
@@ -359,7 +362,6 @@ function runCounters(box){
   });
 }
 if (HAS_IO) {
-  if (!RED) root.classList.add("js");
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); if (e.target.classList.contains("nums")) runCounters(e.target); io.unobserve(e.target); } });
   }, {threshold:.08, rootMargin:"0px 0px -5% 0px"});
@@ -382,11 +384,8 @@ if (HAS_IO) {
   function play(){ load(); var p = v.play(); if (p && p.catch) p.catch(function(){}); }
   if (b) b.addEventListener("click", function(){ v.muted = false; v.volume = 1; play(); b.hidden = true; });
   v.addEventListener("volumechange", function(){ if (b && !v.muted) b.hidden = true; });
-  if (HAS_IO && !RED) {
-    new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
-    }, {threshold:.5}).observe(v);
-  } else load();
+  /* без автозагрузки: 6.5 МБ ролика качаются только по кнопке */
+  v.addEventListener("play", function(){ if (b) b.hidden = true; document.querySelectorAll(".vclip video").forEach(function(o){ if (!o.paused) o.pause(); }); });
 })();
 
 /* ---------------- ВИДЕО ВЛАДЕЛЬЦА ----------------
