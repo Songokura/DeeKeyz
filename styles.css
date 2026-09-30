@@ -559,9 +559,27 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 .hero .lay-primer{filter:none}
 .hero .kicker,.hero .l2,.hero .lead,.hero .ig-link,.hero .gauge{text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 22px rgba(0,0,0,.65)}
 
-/* ---------- статичный режим (30.09.2026, жалоба «лагает»): без слоёв, масок и трансформаций ---------- */
-html.no-plate .ph .lay{transform:none!important;will-change:auto}
-html.no-plate .lay-base{-webkit-mask-image:none;mask-image:none}
-html.no-plate .pp .lay-primer,html.no-plate .pp .tex{display:none}
+/* ---------- плавность (30.09.2026, жалоба «первая анимация дёргается») ----------
+   Всё, что меняется по прокрутке, идёт через transform/opacity на своём слое:
+   факел двигаем translateX вместо left (left пересчитывал раскладку), текст и толщиномер героя
+   на отдельном слое (тень у хромового заголовка больше не перерисовывается каждый кадр),
+   в герое грунт и база - одно и то же фото, поэтому второй слой и маска сняты, клип заголовка убран;
+   у факела обычное наложение вместо screen - на вид то же, а кадр под нагрузкой вдвое дешевле. */
+.fan{left:0;will-change:transform,opacity;mix-blend-mode:normal;transform:translateX(calc((var(--p1) * 124% - 12%) / .3 - 50%))}
+.pw.rtl .fan{left:0;transform:translateX(calc((112% - var(--p1) * 124%) / .3 - 50%))}
+.hero .fan-2{left:0;transform:translateX(calc((112% - var(--p2) * 124%) / .3 - 50%))}
+.hero .lay-primer{display:none}
+.hero .lay-base{-webkit-mask-image:none;mask-image:none}
+.hero .hclip{clip-path:none}
+.htxt,.gauge{will-change:transform,opacity}
+.pw-hero .plate{will-change:transform}
 #kuzovnoy .lay{object-position:50% 58%}
 @media(max-width:760px){#kuzovnoy .lay{object-position:0% 50%}}
+/* интро текста героя - CSS-анимацией на своих слоях, а не переменной из скрипта на каждый кадр */
+.htxt > *{opacity:1;transform:none;animation:hin .95s cubic-bezier(.22,.8,.26,1) both}
+.htxt > :nth-child(1){animation-delay:.15s}
+.htxt > :nth-child(2){animation-delay:.28s;transition-delay:0s}
+.htxt > :nth-child(3){animation-delay:.42s}
+.htxt > :nth-child(4){animation-delay:.54s}
+.htxt > :nth-child(n+5){animation-delay:.64s}
+@keyframes hin{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}

@@ -12,9 +12,6 @@ var WA = "77761566666";
 var RED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 var HAS_IO = typeof IntersectionObserver === "function";
 var root = document.documentElement;
-/* Плиты и появления по прокрутке сняты 30.09.2026: клиент жаловался, что сайт «лагает».
-   Страница всегда в статичном режиме no-plate (тот же, что для reduced-motion). */
-var STATIC = true;
 var ASSET_V = ((document.currentScript && document.currentScript.src.match(/[?&]v=([^&]+)/)) || [])[1] || "";
 
 /* ---------------- КОНВЕРСИИ GOOGLE ADS ----------------
@@ -275,37 +272,44 @@ var bar = document.getElementById("bar");
 var kont = document.getElementById("kontakty");
 var gread = document.getElementById("gread");
 var introK = 1, introDone = true, lastRead = -1;
+/* Сначала читаем все прямоугольники, потом пишем переменные: чередование чтения и записи
+   заставляло браузер пересчитывать раскладку на каждой плите (рывки героя).
+   Одинаковые значения не переписываем - стили плит вдали от экрана не пересчитываются. */
+var last = new Map();
+function setVar(pw, k, v){
+  var m = last.get(pw); if (!m) { m = {}; last.set(pw, m); }
+  if (m[k] !== v) { m[k] = v; pw.style.setProperty(k, v); }
+}
 function update(){
   var H = innerHeight || root.clientHeight;
-  pws.forEach(function(pw){
-    var r = pw.getBoundingClientRect();
+  var rects = pws.map(function(pw){ return pw.getBoundingClientRect(); });
+  var onKont = bar && kont && kont.getBoundingClientRect().top < H * 0.6;
+  pws.forEach(function(pw, i){
+    var r = rects[i];
     var enter = clamp(1 - r.top / H);
     var exit  = clamp(1 - r.bottom / H);
     var stay  = r.height > H + 1 ? clamp(-r.top / (r.height - H)) : enter;
-    pw.style.setProperty("--enter", enter.toFixed(3));
-    pw.style.setProperty("--exit",  exit.toFixed(3));
-    pw.style.setProperty("--stay",  stay.toFixed(3));
+    setVar(pw, "--enter", enter.toFixed(3));
+    setVar(pw, "--exit",  exit.toFixed(3));
+    setVar(pw, "--stay",  stay.toFixed(3));
     pw.classList.toggle("gone", exit >= 1);
     pw.classList.toggle("on", enter > 0.62);
     if (pw === heroPw) {
       var f = easeInOut(clamp((introK - 0.1) / 0.9));
       var p2 = easeInOut(clamp(stay / 0.72));
-      pw.style.setProperty("--f", f.toFixed(3));
-      pw.style.setProperty("--p1", easeInOut(clamp(introK / 0.82)).toFixed(3));
-      pw.style.setProperty("--p2", p2.toFixed(3));
+      setVar(pw, "--f", f.toFixed(3));
+      setVar(pw, "--p1", easeInOut(clamp(introK / 0.82)).toFixed(3));
+      setVar(pw, "--p2", p2.toFixed(3));
       var read = Math.round(40 + 20 * clamp(introK / 0.82) + 50 * p2);
       if (gread && read !== lastRead) { gread.textContent = read; lastRead = read; }
     } else {
-      pw.style.setProperty("--p1", easeInOut(clamp((enter - 0.12) / 0.72)).toFixed(3));
+      setVar(pw, "--p1", easeInOut(clamp((enter - 0.12) / 0.72)).toFixed(3));
     }
   });
   hdrState();
-  if (bar) {
-    var onKont = kont && kont.getBoundingClientRect().top < H * 0.6;
-    bar.classList.toggle("show", scrollY > H * 0.55 && !onKont);
-  }
+  if (bar) bar.classList.toggle("show", scrollY > H * 0.55 && !onKont);
 }
-if (RED || STATIC) {
+if (RED) {
   root.classList.add("no-plate");
   pws.forEach(function(pw){ pw.classList.add("on"); });
   if (gread) gread.textContent = "110";
@@ -362,6 +366,7 @@ function runCounters(box){
   });
 }
 if (HAS_IO) {
+  if (!RED) root.classList.add("js");
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); if (e.target.classList.contains("nums")) runCounters(e.target); io.unobserve(e.target); } });
   }, {threshold:.08, rootMargin:"0px 0px -5% 0px"});
@@ -384,8 +389,11 @@ if (HAS_IO) {
   function play(){ load(); var p = v.play(); if (p && p.catch) p.catch(function(){}); }
   if (b) b.addEventListener("click", function(){ v.muted = false; v.volume = 1; play(); b.hidden = true; });
   v.addEventListener("volumechange", function(){ if (b && !v.muted) b.hidden = true; });
-  /* без автозагрузки: 6.5 МБ ролика качаются только по кнопке */
-  v.addEventListener("play", function(){ if (b) b.hidden = true; document.querySelectorAll(".vclip video").forEach(function(o){ if (!o.paused) o.pause(); }); });
+  if (HAS_IO && !RED) {
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
+    }, {threshold:.5}).observe(v);
+  } else load();
 })();
 
 /* ---------------- ВИДЕО ВЛАДЕЛЬЦА ----------------
