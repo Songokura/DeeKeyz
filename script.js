@@ -75,6 +75,15 @@ var EN = {
   "ba.l":"Our clients' cars: top - as they arrived, bottom - as they left.",
   "ba.h":"Before and after",
   "ba.k":"Our work",
+  "vi.k":"Video",
+  "vi.h":"Madiyar explains what the price is made of",
+  "vi.l":"Short videos about painting, body repair and how to check a shop's work. Tap a video to play it with sound. Videos are in Russian.",
+  "vi.1":"Can a fender repair fit into 40,000 KZT?",
+  "vi.2":"How much does panel painting cost",
+  "vi.3":"Is a garage repair cheaper?",
+  "vi.4":"How to check panel gaps after a repair",
+  "vi.5":"How not to overpay: inspection before repair",
+  "a.vids":"Repair videos","a.vgo":"Play video",
   "a.ba":"Before and after",
   "v.cap":"After an accident: full repaint and restoration in our Ryskulov shop",
   "v.snd":"Watch with sound",
@@ -378,6 +387,25 @@ if (HAS_IO) {
       es.forEach(function(e){ if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
     }, {threshold:.5}).observe(v);
   } else load();
+})();
+
+/* ---------------- ВИДЕО ВЛАДЕЛЬЦА ----------------
+   Ничего не грузится до клика: по кнопке ставится src, звук включён, играет только один ролик. */
+(function(){
+  var clips = [].slice.call(document.querySelectorAll(".vclip"));
+  clips.forEach(function(f){
+    var v = f.querySelector("video"), b = f.querySelector(".vgo");
+    function start(){
+      clips.forEach(function(o){ var ov = o.querySelector("video"); if (ov !== v && !ov.paused) ov.pause(); });
+      var h = document.getElementById("hlv"); if (h && !h.muted && !h.paused) h.pause();
+      if (!v.getAttribute("src")) v.src = v.dataset.src;
+      v.controls = true; v.muted = false;
+      f.classList.add("is-on");
+      var p = v.play(); if (p && p.catch) p.catch(function(){});
+    }
+    b.addEventListener("click", start);
+    v.addEventListener("play", function(){ clips.forEach(function(o){ var ov = o.querySelector("video"); if (ov !== v && !ov.paused) ov.pause(); }); });
+  });
 })();
 
 /* ---------------- ЛЕНТА С КНОПКАМИ ЛИСТАНИЯ ----------------
