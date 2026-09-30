@@ -76,7 +76,7 @@ var EN = {
   "ba.h":"Before and after",
   "ba.k":"Our work",
   "vi.k":"Video",
-  "vi.h":"Madiyar explains what the price is made of",
+  "vi.h":"DEEKEYZ explains what the price is made of",
   "vi.l":"Short videos about painting, body repair and how to check a shop's work. Tap a video to play it with sound. Videos are in Russian.",
   "vi.1":"Can a fender repair fit into 40,000 KZT?",
   "vi.2":"How much does panel painting cost",
