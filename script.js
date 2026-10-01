@@ -124,8 +124,8 @@ var EN = {
   "f.ok":"Thank you! Opening WhatsApp with your request - if the window did not appear, message us directly.",
   "f.err":"Enter your phone so we can reply.",
   "ft.d":"Body repair and car painting in Almaty. Since 2017.",
-  "al.hero":"DEEKEYZ MOTORS technician in a spray booth next to a Toyota Highlander","al.pokraska":"Spray gun on a masked body panel before painting","al.kuzovnoy":"Mercedes S-Class on a frame straightener: rear body restoration","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying clear protection film to the fender of a black car","al.salon":"Leather car interior after restoration",
-  "al.det":"Interior cleaning: brushing the air vents","al.fleet":"Fleet: a row of white company vans",
+  "al.hero":"DEEKEYZ MOTORS technician in a spray booth next to a Toyota Highlander","al.pokraska":"Iwata spray gun over a black fender in a paint booth","al.kuzovnoy":"Mercedes S-Class on a frame straightener: rear body restoration","al.polirovka":"Polishing a black car body with a machine polisher","al.bron":"Applying clear protection film to the fender of a black car","al.salon":"Leather car interior after restoration",
+  "al.det":"Interior cleaning: brushing the air vents","al.fleet":"Fleet, car club and motorcycle club: cars and bikes on a lot",
   "mq.list":"Car painting|Body repair|Accident restoration|Polishing|Protection film|Interior restoration|Detailing|Parts|Fleets"
 };
 var RU_MQ = "Покраска авто|Кузовной ремонт|Ремонт после ДТП|Полировка|Бронеплёнка|Реставрация салона|Детейлинг|Запчасти|Автопаркам";

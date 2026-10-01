@@ -583,3 +583,6 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 .htxt > :nth-child(4){animation-delay:.54s}
 .htxt > :nth-child(n+5){animation-delay:.64s}
 @keyframes hin{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+/* покраска: фото клиента справа, слева размытое продолжение кадра под текст */
+#pokraska .lay{object-position:100% 50%}
+@media(max-width:760px){#pokraska .lay{object-position:72% 50%}}
