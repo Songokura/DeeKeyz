@@ -328,7 +328,7 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .vcap span{display:block;margin-top:8px;font:400 15px/1.45 var(--ft);color:var(--steel2)}
 .proc-side .steps{grid-template-columns:1fr 1fr;margin-top:34px;gap:26px 22px}
 .proc-side .ig-more{margin-top:34px}
-.strip-v figure{width:200px;background:none;overflow:visible}
+.strip-v figure{width:min(200px,calc((100% - 80px) / 6));flex:0 0 auto;background:none;overflow:visible}
 .strip-v .vwrap{display:block;position:relative}
 .strip-v video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:10px;background:var(--graph);box-shadow:0 0 0 1px var(--line)}
 .strip-v figcaption{position:static;padding:10px 2px 0;background:none;font:600 14px/1.3 var(--ft);color:#fff}

@@ -71,7 +71,7 @@ var EN = {
   "vi.2":"How much does panel painting cost",
   "vi.3":"Is a garage repair cheaper?",
   "vi.4":"How to check panel gaps after a repair",
-  "vi.5":"How not to overpay: inspection before repair",
+  "vi.5":"How not to overpay: inspection before repair","vi.6":"Toyota Highlander 2020: front end restored",
   "a.vids":"Repair videos","a.vgo":"Play video","v.go":"Watch",
   "a.ba":"Before and after",
   "v.cap":"After an accident: full repaint and restoration in our Ryskulov shop",
