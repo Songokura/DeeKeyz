@@ -1,11 +1,3 @@
-/* ============================================================
-   DEEKEYZ MOTORS - скрипт страницы.
-   Плиты (герой: база на интро, лак по скроллу, толщиномер;
-   фото-плиты: проход краскопульта по --p1) · перевод RU/EN,
-   казахский словарь грузится отдельным файлом по кнопке KZ ·
-   меню · бегущая лента · лента работ с кнопками · счётчики ·
-   WhatsApp с готовым текстом · форма в WhatsApp. Библиотек нет.
-   ============================================================ */
 (function(){
 "use strict";
 var WA = "77761566666";
@@ -14,8 +6,6 @@ var HAS_IO = typeof IntersectionObserver === "function";
 var root = document.documentElement;
 var ASSET_V = ((document.currentScript && document.currentScript.src.match(/[?&]v=([^&]+)/)) || [])[1] || "";
 
-/* ---------------- КОНВЕРСИИ GOOGLE ADS ----------------
-   Ярлыки задаёт index.html (window.DK_CONV): phone, contact, lead. Пусто - не шлём. */
 function conv(key, item){
   var id = (window.DK_CONV || {})[key];
   if (!id || typeof window.gtag !== "function") return;
@@ -24,7 +14,6 @@ function conv(key, item){
   window.gtag("event", "conversion", p);
 }
 
-/* ---------------- АНГЛИЙСКИЙ СЛОВАРЬ ---------------- */
 var EN = {
   "m.title":"Car Painting and Body Repair in Almaty - DEEKEYZ MOTORS",
   "m.desc":"Body repair and car painting in Almaty since 2017. Panel painting from 40,000 KZT, accident repair, polishing, paint protection film, interior restoration. Free photo estimate on WhatsApp, 5-year paint warranty.",
@@ -130,11 +119,8 @@ var EN = {
 };
 var RU_MQ = "Покраска авто|Кузовной ремонт|Ремонт после ДТП|Полировка|Бронеплёнка|Реставрация салона|Детейлинг|Запчасти|Автопаркам";
 var I18N = {en: EN};
-var RU = {};                                       /* снимок русского текста из разметки */
+var RU = {};
 
-/* ---------------- WHATSAPP: текст по кнопке ----------------
-   data-wa="general|photo|service"; service берёт название из data-wa-title (ключ i18n).
-   Обработчик в фазе захвата на window - раньше трекера LeadBot, чтобы он дописал код к готовой ссылке. */
 var WA_T = {
   ru:{general:"Здравствуйте! Пишу с сайта DEEKEYZ MOTORS.", photo:"Здравствуйте! Хочу получить бесплатную оценку ремонта по фото. Отправляю фото повреждений:", service:"Здравствуйте! Пишу с сайта DEEKEYZ MOTORS. Интересует:\n{name}\nПодскажите стоимость и сроки."},
   en:{general:"Hello! I'm writing from the DEEKEYZ MOTORS website.", photo:"Hello! I'd like a free repair estimate from photos. Sending photos of the damage:", service:"Hello! I'm writing from the DEEKEYZ MOTORS website. I'm interested in:\n{name}\nPlease tell me the price and timing."}
@@ -160,7 +146,6 @@ window.addEventListener("click", function(e){
   } else if (h.indexOf("tel:") === 0) conv("phone");
 }, true);
 
-/* ---------------- ЯЗЫК ---------------- */
 function curLang(){ return root.getAttribute("lang") || "ru"; }
 function snapshot(){
   document.querySelectorAll("[data-i]").forEach(function(el){ RU[el.dataset.i] = el.textContent; });
@@ -189,7 +174,6 @@ function applyLang(lang){
   buildMarquee(g("mq.list"));
   fitAll();
 }
-/* казахский словарь - отдельным файлом, только по выбору человека */
 function loadLang(lang, done){
   if (I18N[lang] || lang !== "kk") return done();
   var s = document.createElement("script");
@@ -210,12 +194,11 @@ function initLang(){
   if (L !== "ru") setLang(L); else buildMarquee(RU_MQ);
 }
 
-/* ---------------- БЕГУЩАЯ ЛЕНТА ---------------- */
 function buildMarquee(list){
   var box = document.getElementById("mq1"); if (!box) return;
   var items = (list || RU_MQ).split("|"), html = "";
   items.forEach(function(t){ html += "<b>" + t + "</b>"; });
-  box.innerHTML = html + html;                                 /* две копии: цикл в одну копию */
+  box.innerHTML = html + html;
   requestAnimationFrame(function(){
     var w = box.scrollWidth / 2;
     box.style.setProperty("--tkw", w + "px");
@@ -223,7 +206,6 @@ function buildMarquee(list){
   });
 }
 
-/* ---------------- ШАПКА И МЕНЮ ---------------- */
 var hdr = document.getElementById("hdr"), burger = document.getElementById("burger");
 function hdrState(){ hdr.classList.toggle("solid", scrollY > 40); }
 function closeMenu(){ document.body.classList.remove("menu-open"); burger.setAttribute("aria-expanded", "false"); }
@@ -233,12 +215,11 @@ burger.addEventListener("click", function(){
 });
 document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeMenu(); });
 
-/* ---------------- ЯКОРЯ ---------------- */
 function goTo(id, push){
   var el = document.getElementById(id); if (!el) return;
   closeMenu();
   var top = el.getBoundingClientRect().top + scrollY;
-  if (el.classList.contains("pw") && el.id !== "top") top += 2;   /* плита: чуть внутрь, чтобы enter = 1 */
+  if (el.classList.contains("pw") && el.id !== "top") top += 2;
   else if (!el.classList.contains("pw")) top -= parseFloat(getComputedStyle(root).getPropertyValue("--hh")) || 72;
   scrollTo({top: Math.max(0, top), behavior: RED ? "auto" : "smooth"});
   if (push !== false) { try { history.pushState(null, "", "#" + id); } catch(e){} }
@@ -248,7 +229,6 @@ document.addEventListener("click", function(e){
   e.preventDefault(); goTo(a.dataset.go);
 });
 
-/* ---------------- FIT TEXT ---------------- */
 function fitOne(el){
   el.style.fontSize = "";
   var box = el.parentElement, max = box.clientWidth, guard = 0;
@@ -259,9 +239,6 @@ function fitAll(){ document.querySelectorAll(".fit").forEach(fitOne); }
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
 addEventListener("resize", fitAll);
 
-/* ---------------- ПЛИТЫ ----------------
-   Один слушатель scroll через rAF. На каждую .pw пишем --enter/--exit/--stay
-   и --p1 (проход базы). Герой: --f (интро - база), --p2 (лак по скроллу), толщиномер. */
 function clamp(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
 function easeOut(t){ return 1 - Math.pow(1 - t, 2.4); }
 function easeInOut(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
@@ -272,9 +249,6 @@ var bar = document.getElementById("bar");
 var kont = document.getElementById("kontakty");
 var gread = document.getElementById("gread");
 var introK = 1, introDone = true, lastRead = -1;
-/* Сначала читаем все прямоугольники, потом пишем переменные: чередование чтения и записи
-   заставляло браузер пересчитывать раскладку на каждой плите (рывки героя).
-   Одинаковые значения не переписываем - стили плит вдали от экрана не пересчитываются. */
 var last = new Map();
 function setVar(pw, k, v){
   var m = last.get(pw); if (!m) { m = {}; last.set(pw, m); }
@@ -323,8 +297,6 @@ if (RED) {
   }, {passive:true});
   addEventListener("resize", update);
   addEventListener("load", update);
-  /* интро 1500 мс: кадр лежит в грунте, проход краскопульта наносит базу, текст поднимается.
-     Пропускаем при хэше / прокрутке - человек из рекламы сразу видит собранный экран. */
   var skip = location.hash || scrollY > 80;
   if (skip) {
     update();
@@ -351,7 +323,6 @@ addEventListener("hashchange", function(){
   setTimeout(function(){ goTo(id, false); }, 420);
 });
 
-/* ---------------- ПОЯВЛЕНИЕ И СЧЁТЧИКИ ---------------- */
 function runCounters(box){
   box.querySelectorAll("[data-count]").forEach(function(el){
     var to = parseInt(el.dataset.count, 10) || 0, t0 = null;
@@ -379,9 +350,6 @@ if (HAS_IO) {
   document.querySelectorAll("[data-count]").forEach(function(el){ el.textContent = el.dataset.count; });
 }
 
-/* ---------------- ВИДЕО HIGHLANDER ----------------
-   src ставится, когда видео входит в кадр: без звука, петлёй; ушло из кадра - пауза.
-   Кнопка «со звуком» включает звук и прячется. reduced-motion - только постер и controls. */
 (function(){
   var v = document.getElementById("hlv"), b = document.getElementById("hlvs");
   if (!v) return;
@@ -396,8 +364,6 @@ if (HAS_IO) {
   } else load();
 })();
 
-/* ---------------- ВИДЕО ВЛАДЕЛЬЦА ----------------
-   Ничего не грузится до клика: по кнопке ставится src, звук включён, играет только один ролик. */
 (function(){
   var clips = [].slice.call(document.querySelectorAll(".vclip"));
   clips.forEach(function(f){
@@ -415,9 +381,6 @@ if (HAS_IO) {
   });
 })();
 
-/* ---------------- ЛЕНТА С КНОПКАМИ ЛИСТАНИЯ ----------------
-   Шаг - ровно одна карточка (ширина из getBoundingClientRect + gap из стилей),
-   крайняя кнопка гаснет, обе прячутся, если всё влезло без прокрутки. */
 var strips = [];
 document.querySelectorAll(".strip-wrap").forEach(function(w){
   var s = w.querySelector(".strip"), prev = w.querySelector(".prev"), next = w.querySelector(".next");
@@ -448,7 +411,6 @@ function stripsState(){ strips.forEach(function(f){ f(); }); }
 addEventListener("load", stripsState);
 addEventListener("resize", stripsState);
 
-/* ---------------- ФОРМА -> WhatsApp ---------------- */
 var FORM_T = {
   ru:{hello:"Здравствуйте! Заявка с сайта DEEKEYZ MOTORS.", name:"Имя", what:"Услуга", msg:"Авто и что случилось", phone:"Телефон", none:"не выбрана"},
   en:{hello:"Hello! Request from the DEEKEYZ MOTORS website.", name:"Name", what:"Service", msg:"Car and what happened", phone:"Phone", none:"not chosen"}
@@ -457,7 +419,7 @@ var form = document.getElementById("form");
 if (form) form.addEventListener("submit", function(e){
   e.preventDefault();
   var ok = document.getElementById("fmok"), err = document.getElementById("fmerr");
-  if (form.company && form.company.value) return;          /* honeypot */
+  if (form.company && form.company.value) return;
   var phone = form.phone.value.trim();
   if (phone.replace(/\D/g, "").length < 10) { err.hidden = false; ok.hidden = true; form.phone.focus(); return; }
   err.hidden = true;
@@ -472,12 +434,10 @@ if (form) form.addEventListener("submit", function(e){
   window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(t), "_blank", "noopener");
 });
 
-/* ---------------- СТАРТ ---------------- */
 snapshot();
 initLang();
 hdrState();
 fitAll();
-/* прямой переход по якорю: встать на блок, интро пропущено выше */
 if (location.hash) {
   var hid = location.hash.slice(1);
   if (document.getElementById(hid)) {

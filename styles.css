@@ -1,20 +1,3 @@
-/* ============================================================
-   DEE.KEYZ GARAGE - кузовной ремонт и покраска, Алматы.
-   Сигнатура: «проход краскопульта: грунт -> база -> лак».
-   Кадр лежит серым матовым грунтом; проход факела распыла (мягкая
-   вертикальная кромка-туман с красным свечением) наносит цвет базы,
-   второй проход кладёт лак - глянцевый блик. В герое база наносится
-   на интро (--f), лак - по скроллу (--stay), внизу толщиномер считает
-   микроны слоёв. Фото-плиты раскрываются тем же проходом по --p1,
-   направление чередуется (.rtl), после раскрытия один блик лака.
-   В каталоге - серые кадры «в грунте» получают цвет проходом при
-   наведении, у строк прайса пробегает красная кромка, фон секций -
-   бледные горизонтальные проходы.
-   Плиты: .pw (обёртка) > .plate (sticky); прогресс в --enter/--exit/--stay.
-   Выравнивание: левый край. Шрифты: Exo 2 (дисплей), Inter Tight (текст).
-   Палитра: ink #07080A, coal #111317, graphite #1B1E24, paper #F2F3F5,
-   red #E10600, chrome #E8EBEF -> #8D949C. Языки RU/KZ/EN.
-   ============================================================ */
 :root{
   --ink:#07080A; --coal:#111317; --graph:#1B1E24; --graph2:#23272E;
   --paper:#F2F3F5; --paper2:#E7E9EC; --white:#F7F8FA;
@@ -44,7 +27,6 @@ figure{margin:0}
 ::selection{background:var(--red);color:#fff}
 [hidden]{display:none!important}
 
-/* ---------- типографика ---------- */
 .kicker{display:flex;align-items:center;gap:12px;font:600 11px/1 var(--ft);letter-spacing:.2em;text-transform:uppercase;color:var(--red-h)}
 .kicker::before{content:"";flex:0 0 auto;width:28px;height:2px;background:var(--red);box-shadow:0 0 10px rgba(225,6,0,.7)}
 .sec-paper .kicker{color:var(--red)}
@@ -55,14 +37,12 @@ h2{font:800 clamp(32px,min(5.2vw,7.2svh),64px)/.98 var(--fd);letter-spacing:-.01
 @media(min-width:761px){.lead{font-size:18px}}
 .sec-head{max-width:none}
 
-/* ---------- кнопки ---------- */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;border:1.5px solid transparent;font:600 14px/1 var(--ft);letter-spacing:.01em;white-space:nowrap;cursor:pointer;overflow:hidden;isolation:isolate;transition:transform .25s,background .25s,border-color .25s,color .25s,box-shadow .25s}
 .btn svg{display:block;flex:0 0 auto}
 .btn:hover{transform:translateY(-2px)}
 .btn-big{height:58px;padding:0 30px;font-size:15px}
 .btn-red{background:var(--red);color:#fff;box-shadow:0 12px 34px rgba(225,6,0,.32)}
 .btn-red:hover{background:var(--red-h);box-shadow:0 14px 40px rgba(225,6,0,.45)}
-/* проход факела по кнопке при наведении */
 .btn-red::after{content:"";position:absolute;inset:-40% -20%;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-120%);pointer-events:none}
 .btn-red:hover::after{animation:pass .9s ease forwards}
 @keyframes pass{to{transform:translateX(120%)}}
@@ -83,7 +63,6 @@ h2{font:800 clamp(32px,min(5.2vw,7.2svh),64px)/.98 var(--fd);letter-spacing:-.01
 .ig-link .arr{font-style:normal;font-weight:700;transition:transform .25s}
 .ig-link:hover .arr{transform:translateX(4px)}
 
-/* ---------- шапка ---------- */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--hh);color:#fff;transition:background .35s,box-shadow .35s}
 .hdr::before{content:"";position:absolute;inset:0 0 -50px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,10,.72),rgba(7,8,10,0));transition:opacity .35s}
 .hdr.solid::before,body.menu-open .hdr::before{opacity:0}
@@ -133,7 +112,6 @@ body.menu-open{overflow:hidden}
 @media(max-width:420px){.logo{height:clamp(13px,calc((100vw - 252px) / 8.2),17px)}.lang button{padding:6px 9px;font-size:11px}.hdr-in{gap:8px}}
 @media(min-width:1081px){.mnav{display:none}}
 
-/* ---------- плиты ---------- */
 .pw{position:relative;height:100svh}
 .pw-hero{height:175svh}
 .plate{position:sticky;top:0;height:100svh;overflow:hidden;transform:scale(calc(1 - .07 * var(--exit)));transform-origin:50% 40%;border-radius:calc(30px * (1 - var(--enter))) calc(30px * (1 - var(--enter))) 0 0;isolation:isolate;background:var(--coal);color:#fff}
@@ -142,19 +120,14 @@ body.menu-open{overflow:hidden}
 .ph{position:absolute;inset:0;z-index:0;overflow:hidden;background:#15181C}
 .ph picture{display:contents}
 .lay{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
-/* грунт: серый матовый кадр */
 .lay-primer{filter:grayscale(1) brightness(.58) contrast(.88)}
-/* фактура грунта - горизонтальные проходы, чуть заметно */
 .tex{background:repeating-linear-gradient(180deg,rgba(255,255,255,.045) 0 30px,rgba(255,255,255,0) 30px 64px);opacity:.9;pointer-events:none}
-/* база: цвет, наносится проходом слева направо */
 .lay-base{-webkit-mask-image:linear-gradient(90deg,#000 calc(var(--p1) * 124% - 24%),transparent calc(var(--p1) * 124%));mask-image:linear-gradient(90deg,#000 calc(var(--p1) * 124% - 24%),transparent calc(var(--p1) * 124%))}
 .pw.rtl .lay-base{-webkit-mask-image:linear-gradient(270deg,#000 calc(var(--p1) * 124% - 24%),transparent calc(var(--p1) * 124%));mask-image:linear-gradient(270deg,#000 calc(var(--p1) * 124% - 24%),transparent calc(var(--p1) * 124%))}
-/* факел распыла на кромке прохода */
 .fan{position:absolute;top:-10%;bottom:-10%;width:30%;left:calc(var(--p1) * 124% - 12%);transform:translateX(-50%);opacity:min(1,var(--p1) * 7,(1 - var(--p1)) * 7);pointer-events:none;mix-blend-mode:screen;
   background:radial-gradient(ellipse 34% 56% at 50% 50%,rgba(255,255,255,.34) 0%,rgba(255,120,110,.22) 34%,rgba(225,6,0,.12) 55%,transparent 74%)}
 .fan::before{content:"";position:absolute;left:50%;top:6%;bottom:6%;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(255,255,255,.9) 20%,rgba(255,255,255,.9) 80%,transparent);box-shadow:0 0 18px rgba(255,80,70,.9),0 0 46px rgba(225,6,0,.6)}
 .pw.rtl .fan{left:calc(112% - var(--p1) * 124%)}
-/* лак: глянцевый блик после раскрытия */
 .lay-clear{opacity:0;background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.24) 50%,transparent 60%);background-size:280% 100%;background-position:130% 0;mix-blend-mode:screen;pointer-events:none}
 .pw.on .lay-clear{animation:lak 1.5s ease .55s forwards}
 @keyframes lak{0%{opacity:1;background-position:130% 0}100%{opacity:1;background-position:-40% 0}}
@@ -163,9 +136,7 @@ html.no-plate .pw{height:auto;--f:1;--stay:1;--enter:1;--p1:1;--p2:1}
 html.no-plate .plate{position:relative;height:auto;min-height:100svh;transform:none;border-radius:0}
 html.no-plate .plate::after,html.no-plate .fan,html.no-plate .lay-clear{display:none}
 
-/* ---------- герой ---------- */
 .hero .ph .lay-base,.hero .ph .lay-primer{transform:scale(calc(1.02 + .08 * var(--stay)));will-change:transform}
-/* лак в герое кладётся вторым проходом справа налево по --p2 */
 .hero .lay-gloss{opacity:calc(.9 * min(1,var(--p2) * 4));mix-blend-mode:soft-light;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.35) 100%);
   -webkit-mask-image:linear-gradient(270deg,#000 calc(var(--p2) * 124% - 24%),transparent calc(var(--p2) * 124%));mask-image:linear-gradient(270deg,#000 calc(var(--p2) * 124% - 24%),transparent calc(var(--p2) * 124%))}
@@ -183,7 +154,6 @@ html.no-plate .plate::after,html.no-plate .fan,html.no-plate .lay-clear{display:
 .hero .lead{margin-top:18px;max-width:none;color:rgba(255,255,255,.86)}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .hero .ig-link{margin-top:20px}
-/* толщиномер */
 .gauge{position:absolute;left:0;right:0;bottom:22px;width:min(1220px,100% - 48px);display:flex;align-items:center;gap:14px;font:600 10px/1 var(--ft);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);opacity:calc(1 - 1.4 * var(--stay))}
 .g-lbl{color:var(--red-h)}
 .g-seg{display:flex;align-items:center;gap:8px;flex:0 1 150px}
@@ -226,7 +196,6 @@ html.no-plate .gauge{opacity:1}
   .gauge{display:none}
 }
 
-/* ---------- фото-плиты услуг ---------- */
 .pp .ph .lay-base,.pp .ph .lay-primer{transform:scale(calc(1.02 + .1 * var(--exit)));will-change:transform}
 .pp-in{position:absolute;inset:0;z-index:4;display:flex;align-items:center;padding:calc(var(--hh) + 10px) 0 40px}
 .pp .txt{max-width:none}
@@ -269,23 +238,19 @@ html.no-plate .pp .txt > *{opacity:1;transform:none}
   .pp .cta .btn{height:48px}
 }
 
-/* ---------- секции ---------- */
 .sec{position:relative;overflow:hidden;padding:clamp(64px,8vw,104px) 0}
 .sec-coal{background:var(--coal)}
 .sec-ink{background:var(--ink)}
 .sec-paper{background:var(--paper);color:var(--ink)}
-/* тихая сигнатура: бледные горизонтальные проходы фоном */
 .sec::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.016) 0 44px,rgba(255,255,255,0) 44px 96px)}
 .sec-paper::before{background:repeating-linear-gradient(180deg,rgba(7,8,10,.022) 0 44px,rgba(7,8,10,0) 44px 96px)}
 .sec-nums::before{display:none}
 .sec-head{position:relative}
 
-/* появление */
 html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .75s ease,transform .75s ease}
 html.js .rv.in{opacity:1;transform:none}
 html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pgrid.rv,html.js .kont.rv,html.js .strip-wrap.rv{transform:none}
 
-/* ---------- цифры ---------- */
 .sec-nums{padding:0 0 44px}
 .mq{overflow:hidden;padding:18px 0;border-bottom:1px solid var(--line);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .mq-in{display:flex;width:max-content;animation:mq var(--tkd,42s) linear infinite}
@@ -312,7 +277,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .num{font-size:30px}
 }
 
-/* ---------- прозрачный ремонт ---------- */
 .strip-wrap{position:relative;margin-top:40px}
 .strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 0 8px;outline:none}
 .strip::-webkit-scrollbar{display:none}
@@ -353,7 +317,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .nick{text-align:center}
 }
 
-/* ---------- видео Highlander ---------- */
 .proc-body{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,72px);align-items:center;margin-top:40px}
 .vcard{position:relative;height:min(76svh,720px);aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:var(--graph);box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px var(--line)}
 .vplay{display:block;width:100%;height:100%;object-fit:cover;background:var(--graph)}
@@ -365,7 +328,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .vcap span{display:block;margin-top:8px;font:400 15px/1.45 var(--ft);color:var(--steel2)}
 .proc-side .steps{grid-template-columns:1fr 1fr;margin-top:34px;gap:26px 22px}
 .proc-side .ig-more{margin-top:34px}
-/* ---------- видео владельца ---------- */
 .strip-v figure{width:200px;background:none;overflow:visible}
 .strip-v .vwrap{display:block;position:relative}
 .strip-v video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:10px;background:var(--graph);box-shadow:0 0 0 1px var(--line)}
@@ -375,7 +337,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .vgo:hover{background:var(--red-h)}
 .vclip.is-on .vgo{display:none}
 @media(max-width:760px){.strip-v figure{width:calc(50vw - 26px)}.strip-v figcaption{font-size:13px}.vgo{height:34px;padding:0 13px 0 11px;font-size:12px}}
-/* ---------- до и после ---------- */
 .strip-ba figure{width:min(340px,78vw)}
 .strip-ba img{aspect-ratio:1/1}
 .strip-ba .tag{position:absolute;left:10px;z-index:2;padding:4px 9px;border-radius:5px;font:700 11px/1 var(--ft);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(7,8,10,.72)}
@@ -390,7 +351,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .proc-side .ig-more{margin-top:26px}
 }
 
-/* ---------- прайс ---------- */
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
 .pcol h3{font:800 20px/1.1 var(--fd);text-transform:uppercase;letter-spacing:.01em;padding-bottom:14px;border-bottom:2px solid var(--ink);display:flex;align-items:center;gap:10px}
 .pcol h3::before{content:"";width:10px;height:10px;background:var(--red);transform:rotate(45deg)}
@@ -400,7 +360,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 .pcol li a b{position:relative;z-index:1;font:700 15px/1 var(--fd);white-space:nowrap;letter-spacing:.01em}
 .pcol li a b::after{content:" ₸";font-size:12px;color:var(--red)}
 .pcol li a svg{position:relative;z-index:1;color:var(--red);opacity:.55;transition:opacity .25s,transform .25s}
-/* проход красной кромки по строке при наведении */
 .pcol li a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(225,6,0,0) 0%,rgba(225,6,0,.1) 48%,rgba(225,6,0,.16) 50%,rgba(225,6,0,0) 52%);background-size:260% 100%;background-position:120% 0;transition:background-position .7s ease;z-index:0}
 .pcol li a:hover::before{background-position:-40% 0}
 .pcol li a:hover svg{opacity:1;transform:scale(1.15)}
@@ -417,14 +376,12 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .pnote{padding:18px}
 }
 
-/* ---------- направления ---------- */
 .dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .dir{display:flex;flex-direction:column;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--graph);transition:border-color .3s,transform .3s}
 .dir:hover{border-color:rgba(225,6,0,.5);transform:translateY(-3px)}
 .dir h3{font:800 22px/1.1 var(--fd);text-transform:uppercase;margin-top:18px}
 .dir p{margin-top:10px;font:400 14px/1.45 var(--ft);color:var(--steel2)}
 .dir .btn{margin-top:16px}
-/* медиа-слот: кадр лежит в грунте (серый), при наведении факел проходит по нему и наносит цвет */
 .media{position:relative;overflow:hidden;background:var(--coal);border-radius:8px;aspect-ratio:4/3;width:100%;isolation:isolate}
 .media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.68);transition:filter 1s ease .25s,transform 1s ease}
 .media::after{content:"";position:absolute;top:-10%;bottom:-10%;left:-30%;width:30%;pointer-events:none;opacity:0;mix-blend-mode:screen;
@@ -447,7 +404,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 }
 @media(hover:none){.media img{filter:none}}
 
-/* ---------- акции ---------- */
 .offers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
 .offers li{position:relative;padding:22px 20px 20px;border-radius:10px;background:#fff;border:1px solid var(--line-d);overflow:hidden;transition:transform .3s,box-shadow .3s}
 .offers li::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);transform:scaleY(.35);transform-origin:top;transition:transform .35s}
@@ -464,7 +420,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 }
 @media(max-width:360px){.offers{grid-template-columns:1fr}}
 
-/* ---------- гарантия ---------- */
 .sec-guar .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:.42;filter:grayscale(.3) contrast(1.05)}
 .sec-guar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,10,.94) 0%,rgba(7,8,10,.8) 50%,rgba(7,8,10,.5) 100%),linear-gradient(180deg,rgba(7,8,10,.4),rgba(7,8,10,.85));pointer-events:none}
 .sec-guar .wrap{z-index:2}
@@ -484,7 +439,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .rev .btn{width:100%}
 }
 
-/* ---------- контакты ---------- */
 .kont{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:44px}
 .ktel{display:block;font:800 clamp(30px,3.6vw,46px)/1 var(--fd);letter-spacing:-.01em;color:#fff}
 .kbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
@@ -525,7 +479,6 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
   .flogo{width:min(260px,72vw)}
 }
 
-/* ---------- липкая панель ---------- */
 .bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:55;display:none;grid-template-columns:1fr 1fr 52px;gap:6px;padding:6px;border-radius:999px;background:rgba(7,8,10,.94);border:1px solid rgba(255,255,255,.14);box-shadow:0 12px 34px rgba(0,0,0,.45);transform:translateY(120%);opacity:0;transition:transform .35s,opacity .35s;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}
 .bar.show{transform:none;opacity:1}
 .bar a{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:999px;font:600 13px/1 var(--ft);color:#fff}
@@ -536,13 +489,11 @@ html.js .nums.rv,html.js .dirs.rv,html.js .offers.rv,html.js .why.rv,html.js .pg
 @media(max-width:760px){.bar{display:grid}}
 body.menu-open .bar{transform:translateY(120%);opacity:0}
 
-/* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .glow{animation:none}
 }
 .hero .kicker{text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 14px rgba(0,0,0,.75)}
-/* герой: фото владельца показываем чётко - без текстуры, лишнего затемнения и сильного зума */
 .hero .tex{display:none}
 .hero .lay-gloss{opacity:calc(.35 * min(1,var(--p2) * 4))}
 .hero .ph .lay-base,.hero .ph .lay-primer{transform:scale(calc(1 + .025 * var(--stay)))}
@@ -552,19 +503,12 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 }
 .hero .lead,.hero .l2,.hero .ig-link{text-shadow:0 1px 2px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.7)}
 @media(min-width:761px){.hero .lay{object-position:50% 10%}}
-/* герой: фото не затемняем (решение клиента 29.09.2026), тёмная подложка только под текстом */
 .hero .lay-gloss{display:none}
 .hero .shade{background:linear-gradient(90deg,rgba(7,8,10,.82) 0%,rgba(7,8,10,.62) 30%,rgba(7,8,10,.2) 48%,rgba(7,8,10,0) 58%)}
 @media(max-width:760px){.hero .shade{background:linear-gradient(180deg,rgba(7,8,10,0) 0%,rgba(7,8,10,0) 34%,rgba(7,8,10,.72) 46%,rgba(7,8,10,.9) 100%)}}
 .hero .lay-primer{filter:none}
 .hero .kicker,.hero .l2,.hero .lead,.hero .ig-link,.hero .gauge{text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 22px rgba(0,0,0,.65)}
 
-/* ---------- плавность (30.09.2026, жалоба «первая анимация дёргается») ----------
-   Всё, что меняется по прокрутке, идёт через transform/opacity на своём слое:
-   факел двигаем translateX вместо left (left пересчитывал раскладку), текст и толщиномер героя
-   на отдельном слое (тень у хромового заголовка больше не перерисовывается каждый кадр),
-   в герое грунт и база - одно и то же фото, поэтому второй слой и маска сняты, клип заголовка убран;
-   у факела обычное наложение вместо screen - на вид то же, а кадр под нагрузкой вдвое дешевле. */
 .fan{left:0;will-change:transform,opacity;mix-blend-mode:normal;transform:translateX(calc((var(--p1) * 124% - 12%) / .3 - 50%))}
 .pw.rtl .fan{left:0;transform:translateX(calc((112% - var(--p1) * 124%) / .3 - 50%))}
 .hero .fan-2{left:0;transform:translateX(calc((112% - var(--p2) * 124%) / .3 - 50%))}
@@ -575,7 +519,6 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 .pw-hero .plate{will-change:transform}
 #kuzovnoy .lay{object-position:50% 58%}
 @media(max-width:760px){#kuzovnoy .lay{object-position:0% 50%}}
-/* интро текста героя - CSS-анимацией на своих слоях, а не переменной из скрипта на каждый кадр */
 .htxt > *{opacity:1;transform:none;animation:hin .95s cubic-bezier(.22,.8,.26,1) both}
 .htxt > :nth-child(1){animation-delay:.15s}
 .htxt > :nth-child(2){animation-delay:.28s;transition-delay:0s}
@@ -583,6 +526,5 @@ body.menu-open .bar{transform:translateY(120%);opacity:0}
 .htxt > :nth-child(4){animation-delay:.54s}
 .htxt > :nth-child(n+5){animation-delay:.64s}
 @keyframes hin{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-/* покраска: фото клиента справа, слева размытое продолжение кадра под текст */
 #pokraska .lay{object-position:100% 50%}
 @media(max-width:760px){#pokraska .lay{object-position:72% 50%}}
