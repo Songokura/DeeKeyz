@@ -144,6 +144,7 @@ window.addEventListener("click", function(e){
     a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(waText(a.dataset.wa, a.dataset.waTitle));
     conv("contact", a.dataset.waTitle || a.dataset.wa);
   } else if (h.indexOf("tel:") === 0) conv("phone");
+  else if (h.indexOf("mailto:") === 0 || h.indexOf("https://t.me/") === 0) conv("contact");
 }, true);
 
 function curLang(){ return root.getAttribute("lang") || "ru"; }
