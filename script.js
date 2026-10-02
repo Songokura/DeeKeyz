@@ -106,7 +106,7 @@ var EN = {
   "y4.h":"Real people","y4.t":"You talk to the shop owner directly, not a call centre",
   "rv.t":"Read client reviews on our 2GIS page - they are real, with dates and photos.","rv.b":"Reviews on 2GIS",
   "k.k":"Contacts","k.h":"Send photos - we estimate for free","k.l":"We reply on WhatsApp, by phone or on Telegram. Open 08:00-20:00, two shops in Almaty.",
-  "k.hrs":"Daily","k.a1":"Ryskulov St. 103/3, level -1, office 1","k.a2":"Tastybulak district, Alexey Khegay St. 6/1",
+  "k.hrs":"Daily","k.a1":"Ryskulov St. 103/3, level -1, office 1",
   "f.name":"Name","f.nameph":"How should we address you","f.phone":"Phone","f.what":"What do you need","f.w0":"Choose a service",
   "f.msg":"Make, model, what happened","f.msgph":"Toyota Camry 70, scratch on the rear bumper","f.send":"Send on WhatsApp",
   "f.note":"The request opens in your WhatsApp: add photos of the damage there.",
